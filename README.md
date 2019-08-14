@@ -2,12 +2,21 @@
 
 MortyBot is a Python bot implementing several strategies. It can work with any assets pair on the TurtleNetwork DEX.
 
+The bot is based on https://github.com/BlackTurtle123/BlackBotTN and https://github.com/wavesplatform/demo-python-trading-bot
+
+The main reason for creating my own bot and not using the two above was that i was constantly running into errors/problems when trying out different trading pairs. Initially i tried just fixing the errors as they popped up, but in the end i thought it would be easier to create a new bot where i could work out all the kinks and integrate more strategies.
+
 Currently included strategies are: GRID and SCALP.
 
 ## Grid Trading
 Grid trading doesn’t care about which way the market’s going — in fact, as a profitable strategy it works best in ranging markets. The strategy places a ladder of sells at regular intervals above market price, and another ladder of buys beneath it. If a sell is filled, those funds are used to place a buy just beneath that sell. Thus you can think of the grid as a series of pairs of buys/sells stretching up and down the price chart, with either the buy or sell in each pair always active.
 
 For example, let’s say the last price is 2000 satoshis you’ve got sells laddered up at 2100, 2200, 2300… If the price hits 2100, you immediately use those funds to place a new buy at 2000. If it drops to 2000 again, you buy back the Incent you sold at 2100. If it rises further, you sell at 2200 and open a buy at 2100. Whichever way the price moves, you’re providing depth — buffering the market and smoothing out any peaks and troughs. Additionally, if you open and then close a trade within a tranche (e.g. you sell at 2200, then buy back at 2100) then you make a small profit.
+
+## Scalp Trading
+Scalping exploits small changes in currency prices: it buys at the mean price minus some step and sells at the mean price plus some step, in order to gain the bid/ask difference. It normally involves establishing and liquidating a position quickly.
+
+For example, let's trade on TN-BTC pair (TN is an amount asset and BTC is a price_asset). The spread mean price is ```(best_bid + best_ask) / 2```. The price step is ```0.5%``` from mean price. MortyBot will place the buy order at price ```meanprice * (1 - price_step)``` and the amount ```(BTC_balance / bid_price) - order_fee```. The sell order is placed at ```meanprice * (1 + price_step)``` and the amount equal to ```TN_balance - order_fee```.
 
 ## Getting Started
 
