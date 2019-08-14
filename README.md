@@ -28,7 +28,7 @@ pip install configparser (python 3.x)
 You can start MortyBot with this command:
 
 ```
-python MortyBot.py sample-bot.cfg
+python MortyBotTN.py sample-bot.cfg
 ```
 
 below you can find a sample configuration file:
