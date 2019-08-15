@@ -17,8 +17,11 @@ For example, let’s say the last price is 2000 satoshis you’ve got sells ladd
 Scalping exploits small changes in currency prices: it buys at the mean price minus some step and sells at the mean price plus some step, in order to gain the bid/ask difference. It normally involves establishing and liquidating a position quickly.
 
 For example, let's trade on TN-BTC pair (TN is an amount asset and BTC is a price_asset). The spread mean price is ```(best_bid + best_ask) / 2```. The price step is ```0.5%``` from mean price. MortyBot will place the buy order at price ```meanprice * (1 - price_step)``` and the amount ```(BTC_balance / bid_price) - order_fee```. The sell order is placed at ```meanprice * (1 + price_step)``` and the amount equal to ```TN_balance - order_fee```.
+### The SCALP strategy will use the total balance in the set wallet for trading the selected pair, so use a seperate trader wallet!
 
 ## Getting Started
+
+Create a new wallet for use with the trader bot and move the funds you want to use over to it.
 
 MortyBot requires Python 2.7 or 3.x and the following Python packages:
 
