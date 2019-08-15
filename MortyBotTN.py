@@ -104,7 +104,7 @@ def grid_place_order(bot, order_type, level):
             tranche_size = bot.grid_tranche #* (10 ** PAIR2.asset1.decimals)
             tranche_size = int(tranche_size * (1 - (bot.grid_flexibility / float(200)) + (random.random() * bot.grid_flexibility / float(100))))
             if bot.price_asset_id == "TN": 
-                required_amount = (tranche_size * price) * pow(10, PAIR2.asset2.decimals - 2)
+                required_amount = (tranche_size * price) * pow(10, PAIR2.asset2.decimals - 2) + bot.order_fee
             else:
                 required_amount = (tranche_size * price)
 
@@ -122,7 +122,7 @@ def grid_place_order(bot, order_type, level):
                         bot.can_buy = "no"
                     id = ""
             elif order_type == "sell":
-                if bot.price_asset_id == "TN": required_amount = tranche_size
+                if bot.amount_asset_id == "TN": required_amount = tranche_size + bot.order_fee
 
                 if balance_amount >= required_amount:
                     bot.can_sell = "yes"
