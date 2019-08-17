@@ -256,9 +256,9 @@ def go_scalp(bot):
         bid_price = spread_mean_price * (1 - bot.price_step)
         ask_price = spread_mean_price * (1 + bot.price_step)
         if bot.price_asset_id == "TN": 
-            bid_amount = int(((balance_price - bot.order_fee) / bid_price) * pow(10, PAIR2.asset2.decimals))
+            bid_amount = int(((balance_price - bot.order_fee) / bid_price) * pow(10, PAIR2.asset2.decimals)) 
         else:
-            bid_amount = balance_price
+            bid_amount = int((balance_price / bid_price) * pow(10, PAIR2.asset2.decimals))
 	
         bot.log("Best_bid: {0}, best_ask: {1}, spread mean price: {2}".format(best_bid, best_ask, spread_mean_price))
 
@@ -271,9 +271,9 @@ def go_scalp(bot):
 
         balance_amount, balance_price = my_address.tradableBalance(PAIR)
         if bot.price_asset_id == "TN": 
-            ask_amount = int(balance_amount)
+            ask_amount = balance_amount
         else:
-            ask_amount = balance_amount - bot.order_fee
+            ask_amount = balance_amount 
 
         if ask_amount >= bot.min_amount:
             price = int(ask_price / 100) * 100
