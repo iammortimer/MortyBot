@@ -273,7 +273,7 @@ def go_scalp(bot):
         if bot.price_asset_id == "TN": 
             ask_amount = balance_amount
         else:
-            ask_amount = balance_amount 
+            ask_amount = balance_amount - bot.order_fee
 
         if ask_amount >= bot.min_amount:
             price = int(ask_price / 100) * 100
